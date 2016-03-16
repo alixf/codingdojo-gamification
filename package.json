@@ -1,0 +1,18 @@
+{
+  "name": "codingdojo-gamification",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\""
+  },
+  "author": "Alix Fumoleau <alix.fumoleau@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.4",
+    "lodash": "^4.6.1",
+    "nodejs-websocket": "^1.5.0",
+    "sse": "0.0.6",
+    "vue": "^1.0.17"
+  }
+}
