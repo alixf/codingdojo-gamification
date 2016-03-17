@@ -1,5 +1,6 @@
 package com.betomorow.codingdojos.exercices.exo1;
 
+import com.betomorow.codingdojos.exercices.MedalId;
 import com.betomorow.codingdojos.exercices.Settings;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
@@ -11,16 +12,17 @@ public class GamificationHelper {
 
     private static OkHttpClient httpClient = new OkHttpClient();
 
-    public static void validateMedal(String id) throws Exception {
+    public static void validateMedal(MedalId id) throws Exception {
         validateMedal(id, true);
     }
 
-    public static void validateMedal(String id, boolean isSuccess) throws Exception {
+    public static void validateMedal(MedalId id, boolean isSuccess) throws Exception {
         httpClient.newCall(
             new Request.Builder().get()
-                .url(String.format("http://localhost:9090/post?user=%s&id=%s&success=%s",
+                .url(String.format("%s?user=%s&id=%s&success=%s",
+                    Settings.SERVER_URL,
                     URLEncoder.encode(Settings.USERNAME, StandardCharsets.UTF_8.toString()),
-                    id,
+                    id.getValue(),
                     isSuccess ? "true" : "false"
                 ))
                 .build()
