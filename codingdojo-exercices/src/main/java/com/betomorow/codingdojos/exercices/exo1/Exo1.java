@@ -13,7 +13,7 @@ public class Exo1 {
      * "aaa"
      */
     public String matchLetters() {
-        return "";
+        return "abc.*";
     }
 
     /**
@@ -26,7 +26,7 @@ public class Exo1 {
      * "Cdb"
      */
     public String matchWithoutLetter() {
-        return "";
+        return "[^cC]*";
     }
 
     /**
@@ -40,7 +40,7 @@ public class Exo1 {
      * "abc"
      */
     public String matchNumbers() {
-        return "";
+        return "\\d+(.\\d+)?";
     }
 
     /**
@@ -56,7 +56,7 @@ public class Exo1 {
      * ""
      */
     public String matchWords() {
-        return "";
+        return "[a-zA-Z]+( [a-zA-Z]+)*";
     }
 
     /**
@@ -71,7 +71,7 @@ public class Exo1 {
      * "11"
      */
     public String matchDoubleLetterOccurence() {
-        return "";
+        return ".*([a-zA-Z]).*\\1.*";
     }
 
     /**
@@ -84,7 +84,7 @@ public class Exo1 {
      * "can't touch this"
      */
     public String matchDoesntContainWord() {
-        return "";
+        return "(?!.*this).*";
     }
 
     /**
@@ -97,7 +97,7 @@ public class Exo1 {
      * "this cannot come before hello"
      */
     public String wordCannotBeFollowedByAnother() {
-        return "";
+        return "(?!.*this.*hello).*";
     }
 
     /**
@@ -112,6 +112,6 @@ public class Exo1 {
      *
      */
     public String hasSpecialWordSurroundedBySpace() {
-        return "";
+        return "(?i).*(?<=\\s)space(?=\\s).*";
     }
 }
