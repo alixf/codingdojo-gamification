@@ -9,7 +9,8 @@ app.get('/post', function(req, res) {
 	clients.forEach(function(client) {
 		var message = {
 			user : req.query.user,
-			id : req.query.id
+			id : req.query.id,
+			success : req.query.success
 		};
 		console.log(message);
 		client.send(JSON.stringify(message));
