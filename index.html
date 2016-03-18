@@ -85,19 +85,26 @@
       var socket = new WebSocket('ws://localhost:8001');
       socket.onmessage = function (event) {
         message = JSON.parse(event.data);
+        console.log(event.data);
 
         var user = _.find(self.$data.users, {name : message.user});
         if(user == null) {
-          self.$data.users.push({name : message.user, achievements : []});
+          self.$data.users.push({name : message.user, achievements : [], code : ''});
         }
         var user = _.find(self.$data.users, {name : message.user});
 
-        if(message.success && message.success==='true') {
-          user.achievements = _.union(user.achievements, [message.id]);
+
+        if(message.type == 'code') {
+          user.code = message.code;
         } else {
-          user.achievements = _.pull(user.achievements, message.id);
-          user.achievements = _.union(user.achievements, ['']); // mutation trick
+          if(message.success && message.success==='true') {
+            user.achievements = _.union(user.achievements, [message.id]);
+          } else {
+            user.achievements = _.pull(user.achievements, message.id);
+            user.achievements = _.union(user.achievements, ['']); // mutation trick
+          }
         }
+
         console.log(user);
       };
     },
@@ -106,16 +113,7 @@
         return _.includes(user.achievements, achievement);
       },
       showCode : function(user) {
-        this.code = '#include <iostream> \n'+
-          'int main(int argc, char *argv[]) {\n'+
-            '/* An annoying "Hello World" example */\n'+
-            'for (auto i = 0; i < 0xFFFF; i++)\n'+
-              'cout << "Hello, World!" << endl;\n'+
-            'char c = "\n";\n'+
-            'unordered_map <string, vector<string> > m;\n'+
-            'm["key"] = "\\\\"; // this is an error\n'+
-            'return -2e3 + 12l;\n'+
-          '}';
+        this.code = user.code;
         $('#codeModal').openModal();
       }
     }
