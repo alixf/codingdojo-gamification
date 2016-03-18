@@ -1,13 +1,40 @@
 package com.betomorow.codingdojos.exercices.exo1;
 
 import com.betomorow.codingdojos.exercices.MedalId;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 import static com.betomorow.codingdojos.exercices.exo1.GamificationHelper.validateMedal;
+import static com.betomorow.codingdojos.exercices.exo1.GamificationHelper.uploadCode;
 import static junit.framework.TestCase.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class Exo1Test {
+    @BeforeClass
+    public static void setUp() {
+        try {
+            String t = Exo1.class.getResource(".").toURI().getPath();
+            t = t.replaceAll("\\\\", "/");
+            t = t.replace("build/classes/test/com/betomorow/codingdojos/exercices/exo1",
+                    "src/main/java/com/betomorow/codingdojos/exercices/exo1/Exo1.java");
+            String content = String.join("\n", Files.readAllLines(Paths.get(new File(t).toURI()), Charset.defaultCharset()));
+            uploadCode(content);
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Test
     public void matchLetters() throws Exception {
         String regex = new Exo1().matchLetters();

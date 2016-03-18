@@ -11,6 +11,7 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 
 app.get('/post', function(req, res) {
+  console.log("/post");
 	clients.forEach(function(client) {
 		var message = {
 			type : 'achievement',
@@ -25,6 +26,7 @@ app.get('/post', function(req, res) {
 });
 
 app.post('/code', function(req, res) {
+  console.log("/code");
 	clients.forEach(function(client) {
 		console.log(req.body);
 		var message = {
