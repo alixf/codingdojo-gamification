@@ -6,8 +6,8 @@
   <script src="node_modules/lodash/lodash.js"></script>
   <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/default.min.css">
   <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/highlight.min.js"></script>
+  <link rel="stylesheet" title="Androidstudio" href="androidstudio.css">
   <style>
     .mid {
       font-size: 3rem;
@@ -41,14 +41,17 @@
         <div class="col s2"><h4>{{user.name}}</h4></div>
 
         <div class="achievements col s6">
-          <i class="medium material-icons star" :enabled="isUnlocked(user, 'id1') ? 'on' : null">star</i>
-          <i class="medium material-icons star" :enabled="isUnlocked(user, 'id2') ? 'on' : null">star</i>
-          <i class="medium material-icons star" :enabled="isUnlocked(user, 'id3') ? 'on' : null">star</i>
-          <i class="medium material-icons star" :enabled="isUnlocked(user, 'id4') ? 'on' : null">star</i>
-          <i class="medium material-icons star" :enabled="isUnlocked(user, 'id5') ? 'on' : null">star</i>
-          <i class="medium material-icons star" :enabled="isUnlocked(user, 'id6') ? 'on' : null">star</i>
-          <i class="medium material-icons star" :enabled="isUnlocked(user, 'id7') ? 'on' : null">star</i>
-          <i class="medium material-icons star" :enabled="isUnlocked(user, 'id8') ? 'on' : null">star</i>
+          .
+          <div style="display : none;">
+            <i class="medium material-icons star" :enabled="isUnlocked(user, 'id1') ? 'on' : null">star</i>
+            <i class="medium material-icons star" :enabled="isUnlocked(user, 'id2') ? 'on' : null">star</i>
+            <i class="medium material-icons star" :enabled="isUnlocked(user, 'id3') ? 'on' : null">star</i>
+            <i class="medium material-icons star" :enabled="isUnlocked(user, 'id4') ? 'on' : null">star</i>
+            <i class="medium material-icons star" :enabled="isUnlocked(user, 'id5') ? 'on' : null">star</i>
+            <i class="medium material-icons star" :enabled="isUnlocked(user, 'id6') ? 'on' : null">star</i>
+            <i class="medium material-icons star" :enabled="isUnlocked(user, 'id7') ? 'on' : null">star</i>
+            <i class="medium material-icons star" :enabled="isUnlocked(user, 'id8') ? 'on' : null">star</i>
+          </div>
         </div>
 
         <div class="col s4" style="text-align : right;">
@@ -63,7 +66,7 @@
     <div id="codeModal" class="modal modal-fixed-footer">
       <div class="modal-content">
         <h4>Code</h4>
-          <pre><code class="java">{{code}}</code></pre>
+          <pre id="code"><code class="java">{{code}}</code></pre>
       </div>
       <div class="modal-footer">
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
@@ -73,12 +76,13 @@
 
 
   <script type="text/javascript">
+  hljs.initHighlightingOnLoad();
   Vue.config.debug = true;
   new Vue({
     el: '#achievements',
     data: {
       users : [{name : 'Alix', achievements : []}],
-      code : '...'
+      code : "import java.net.test; \n class Test { \n \n }"
     },
     created : function() {
       var self = this;
@@ -115,6 +119,7 @@
       showCode : function(user) {
         this.code = user.code;
         $('#codeModal').openModal();
+        hljs.highlightBlock(document.querySelector("#code"));
       }
     }
   });
